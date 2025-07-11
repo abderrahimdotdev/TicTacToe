@@ -98,6 +98,12 @@ namespace TicTacToe.Classes
             return integerFields;
         }
 
+        public void Draw(ref Graphics g)
+        {
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    _fields[i, j].Draw(g);
+        }
         public void Clean()
         {
             for (int i = 0; i < 3; i++)
