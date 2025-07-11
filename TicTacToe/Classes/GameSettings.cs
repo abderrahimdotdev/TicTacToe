@@ -9,10 +9,26 @@ namespace TicTacToe.Classes
 {
     internal class GameSettings
     {
+        /// <summary>
+        /// Gets or sets the directory path where log files are stored.
+        /// </summary>
         public static string LogDirectory = @"";
+
+        /// <summary>
+        /// Represents the default background color used by the application.
+        /// </summary>
         public static Color DefaultBackgroundColor = Color.Cornsilk;
+
+        /// <summary>
+        /// Represent image resources of Tom and Jerry used in the application.
+        /// </summary>
         public static Image TomPicture = TicTacToe.Properties.Resources.Tom;
-        public static Color FieldsColor = Color.MidnightBlue;
         public static Image JerryPicture = TicTacToe.Properties.Resources.Jerry;
+
+        /// <summary>
+        /// Represents the default color used for playboard field elements.
+        /// </summary>
+        public static Color FieldsColor = Color.MidnightBlue;
+        
     }
 }
