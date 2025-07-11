@@ -163,7 +163,7 @@ namespace TicTacToe.Classes
                 {
                     case GameProgress.Over:
                         _currentPlayer.Win();
-                        //_logger.Save();
+                        _logger.Save();
                         MessageBox.Show(_currentPlayer.GetName() + " a gagné la partie.", "Félicitations", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         break;
                     case GameProgress.InProgress:
