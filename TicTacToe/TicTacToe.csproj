@@ -80,5 +80,11 @@
   <ItemGroup>
     <Folder Include="Classes\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Background.png" />
+    <Content Include="Images\ButtonBg.png" />
+    <Content Include="Images\Jerry.png" />
+    <Content Include="Images\Tom.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
