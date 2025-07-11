@@ -86,7 +86,7 @@ namespace TicTacToe.Screens
         private void Done(object sender, RunWorkerCompletedEventArgs e)
         {
             if (BW.CancellationPending) CancelBackgroundWork();
-            if (MessageBox.Show("Rejour ?", "Rejouer la partie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Play again ?", "Replay another game", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 BW.RunWorkerAsync(listPlayedGames.SelectedIndex);
             Repaint();
             gm.NewGame();
@@ -187,7 +187,7 @@ namespace TicTacToe.Screens
                 }
             }
             else
-                MessageBox.Show("Veuillez choisir d'abord la partie à jouer.", "Choix no valid", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Please select the game to replay.", "Invalid choice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
 
