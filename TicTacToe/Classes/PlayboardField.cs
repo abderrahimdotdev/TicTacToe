@@ -9,7 +9,7 @@ using static System.Windows.Forms.AxHost;
 
 namespace TicTacToe.Classes
 {
-    enum State { Empty = 0, X = 1, O = -1 };
+     enum State { Empty=0, X=1, O=-1 };
     internal class PlayboardField
     {
         Rectangle _rectangle;
@@ -20,6 +20,8 @@ namespace TicTacToe.Classes
         {
             _rectangle = new Rectangle(Location, new Size(Size, Size));
             _currentState = State.Empty;
+            _image1 = GameSettings.JerryPicture.GetThumbnailImage(_rectangle.Width - _imageMargin, _rectangle.Height - _imageMargin, null, new IntPtr());
+            _image2 = GameSettings.TomPicture.GetThumbnailImage(_rectangle.Width - _imageMargin, _rectangle.Height - _imageMargin, null, new IntPtr());
 
         }
 
@@ -30,6 +32,12 @@ namespace TicTacToe.Classes
         public bool IsEmpty()
         {
             return _currentState == State.Empty;
+        }
+        public void Draw(Graphics g)
+        {
+            Pen p = new Pen(GameSettings.FieldsColor, 2);
+            g.DrawRectangle(p, _rectangle);
+
         }
         public void Reset()
         {

@@ -95,9 +95,7 @@ namespace TicTacToe.Classes
                     integerFields[i, j] = t.IsX() ? 1 : (t.IsO() ? -1 : 0);
                 }
             }
-
             return integerFields;
-
         }
 
         public void Clean()
