@@ -3,74 +3,57 @@ using System.Drawing;
 
 namespace TicTacToe.Classes
 {
-    enum State { Empty = 0, X = 1, O = -1 };
+
     internal class PlayboardField
     {
-        Rectangle _rectangle;
-        State _currentState;
-        Image _image1 = null, _image2 = null;
-        static readonly int _imageMargin = 25;
+
+        enum State { Empty = 0, X = 1, O = -1 };
+
+
+        private Rectangle rectangle;
+        private State currentState;
+        private Image jerry, tom;
+
+        /// <summary>
+        /// Margin used for drawing tom and jerry images in the playboard field.
+        /// </summary>
+        const int margin = 25;
+
         public PlayboardField(Point Location, int Size)
         {
-            _rectangle = new Rectangle(Location, new Size(Size, Size));
-            _currentState = State.Empty;
-            _image1 = GameSettings.JerryPicture.GetThumbnailImage(_rectangle.Width - _imageMargin, _rectangle.Height - _imageMargin, null, new IntPtr());
-            _image2 = GameSettings.TomPicture.GetThumbnailImage(_rectangle.Width - _imageMargin, _rectangle.Height - _imageMargin, null, new IntPtr());
+            rectangle = new Rectangle(Location, new Size(Size, Size));
+            currentState = State.Empty;
+            jerry = GameSettings.JerryPicture.GetThumbnailImage(rectangle.Width - margin, rectangle.Height - margin, null, new IntPtr());
+            tom = GameSettings.TomPicture.GetThumbnailImage(rectangle.Width - margin, rectangle.Height - margin, null, new IntPtr());
 
         }
 
-        public bool PointInField(Point p)
-        {
-            return _rectangle.Contains(p);
-        }
-        public bool IsEmpty()
-        {
-            return _currentState == State.Empty;
-        }
         public void Draw(Graphics g)
         {
             Pen p = new Pen(GameSettings.FieldsColor, 2);
-            g.DrawRectangle(p, _rectangle);
+            g.DrawRectangle(p, rectangle);
 
-        }
-        public void Reset()
-        {
-            _currentState = State.Empty;
         }
         public bool PlayX(ref Graphics g)
         {
-            if (IsEmpty())
-            {
-                if (_image1 != null)
-                {
-                    Image newImage = _image1;
-                    Point corner = new Point(_rectangle.Left + _imageMargin / 2, _rectangle.Top + _imageMargin / 2);
-                    g.DrawImage(newImage, corner);
-                }
-                else
-                    DrawX(ref g);
-                _currentState = State.X;
-                return true;
-            }
-            return false;
+            if (!IsEmpty()) return false;
+
+            if (jerry != null) drawImage(ref g, jerry);
+            else DrawX(ref g);
+
+            currentState = State.X;
+            return true;
+
         }
         public bool PlayO(ref Graphics g)
         {
-            if (IsEmpty())
-            {
+            if (!IsEmpty()) return false;
 
-                if (_image2 != null)
-                {
-                    Image newImage = _image2;
-                    Point corner = new Point(_rectangle.Left + _imageMargin / 2, _rectangle.Top + _imageMargin / 2);
-                    g.DrawImage(newImage, corner);
-                }
-                else
-                    DrawO(ref g);
-                _currentState = State.O;
-                return true;
-            }
-            return false;
+            if (tom != null) drawImage(ref g, tom);
+            else DrawO(ref g);
+
+            currentState = State.O;
+            return true;
         }
 
         // -- Fallback Methods --
@@ -78,10 +61,10 @@ namespace TicTacToe.Classes
         {
             int Padding = 20;
             Pen p = new Pen(Color.Brown, 15);
-            int Left = _rectangle.Left + Padding,
-                Right = _rectangle.Right - Padding,
-                Top = _rectangle.Top + Padding,
-                Bottom = _rectangle.Bottom - Padding;
+            int Left = rectangle.Left + Padding,
+                Right = rectangle.Right - Padding,
+                Top = rectangle.Top + Padding,
+                Bottom = rectangle.Bottom - Padding;
             g.DrawLine(p, Left, Top, Right, Bottom);
             g.DrawLine(p, Right, Top, Left, Bottom);
         }
@@ -89,16 +72,36 @@ namespace TicTacToe.Classes
         {
             Brush b = new SolidBrush(Color.DarkBlue);
             int Padding = 20;
-            g.FillEllipse(b, _rectangle.Left + Padding / 2, _rectangle.Top + Padding / 2, _rectangle.Width - Padding, _rectangle.Width - Padding);
+            g.FillEllipse(b, rectangle.Left + Padding / 2, rectangle.Top + Padding / 2, rectangle.Width - Padding, rectangle.Width - Padding);
         }
 
+
+        // -- Utility Methods --
+
+        public bool PointInField(Point p)
+        {
+            return rectangle.Contains(p);
+        }
+        public bool IsEmpty()
+        {
+            return currentState == State.Empty;
+        }
         public bool IsO()
         {
-            return _currentState == State.O;
+            return currentState == State.O;
         }
         public bool IsX()
         {
-            return _currentState == State.X;
+            return currentState == State.X;
+        }
+        public void Reset()
+        {
+            currentState = State.Empty;
+        }
+        private void drawImage(ref Graphics g, Image img)
+        {
+            Point corner = new Point(rectangle.Left + margin / 2, rectangle.Top + margin / 2);
+            g.DrawImage(img, corner);
         }
     }
 }
