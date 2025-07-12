@@ -9,7 +9,7 @@ using static System.Windows.Forms.AxHost;
 
 namespace TicTacToe.Classes
 {
-     enum State { Empty=0, X=1, O=-1 };
+    enum State { Empty = 0, X = 1, O = -1 };
     internal class PlayboardField
     {
         Rectangle _rectangle;

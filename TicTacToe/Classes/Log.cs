@@ -33,7 +33,7 @@ namespace TicTacToe.Classes
                 Directory.CreateDirectory(GameSettings.LogDirectory);
             }
             string logFile = Path.Combine(GameSettings.LogDirectory, FormatLogFileName());
-           
+
 
             string[] headLines = FormatHeadline();
             bool fileExists = File.Exists(logFile);

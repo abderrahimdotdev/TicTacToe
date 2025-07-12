@@ -20,7 +20,7 @@ namespace TicTacToe.Screens
 
         private void Home_Load(object sender, EventArgs e)
         {
-           
+
         }
         private void btnQuit_Click(object sender, EventArgs e)
         {
