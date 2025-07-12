@@ -42,7 +42,7 @@ namespace TicTacToe.Classes
             }
             public void MarkMove(int x, int y, ref Graphics g, bool LogThis = true)
             {
-            PlayboardField currentField = _board.At(x, y);
+                PlayboardField currentField = _board.At(x, y);
                 Mark(currentField, ref g, LogThis);
             }
             private void Mark(PlayboardField f, ref Graphics g, bool LogThis)
@@ -58,7 +58,7 @@ namespace TicTacToe.Classes
                     NextTurn();
                     if (_vsComputer && _currentPlayer == _player2)
                     {
-                    PlayboardField target = PlayAI();
+                        PlayboardField target = PlayAI();
                         System.Threading.Thread.Sleep(500);
                         if (target != null) target.PlayO(ref g);
                         NextTurn();
@@ -68,45 +68,85 @@ namespace TicTacToe.Classes
 
             }
 
-            private PlayboardField PlayAI()
-            {
+        private PlayboardField PlayAI()
+        {
             PlayboardField t = null;
-                Minimax(_board.ToIntegers(), 1, ref t);
-                return t;
+            int bestScore = -2;
 
-            }
-            private int Minimax(int[,] board, int opponent, ref PlayboardField dest)
+            int[,] fields = _board.ToIntegers();
+
+            for (int i = 0; i < 3; i++)
             {
-                int winMove = CheckWinnerInts(board);
-                if (winMove != 0) return winMove * opponent;
-
-                int bestScore = -2;
-
-                for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
                 {
-
-                    for (int j = 0; j < 3; j++)
+                    if (fields[i, j] == 0)
                     {
-                        if (board[i, j] == 0)
+                        fields[i, j] = 1;
+                        int score = Minimax(fields, true);
+                        fields[i, j] = 0;
+                        if (score > bestScore)
                         {
-                            board[i, j] = opponent;
-                            int score = -Minimax(board, -opponent, ref dest);
-                            board[i, j] = 0;
-                            if (score > bestScore)
-                            {
-                                bestScore = score;
-                                dest = _board.At(i, j);
-                            }
-
+                            bestScore = Math.Max(score, bestScore);
+                            t = _board.At(i, j);
                         }
                     }
 
                 }
+            }
 
-                return bestScore == -2 ? 0 : bestScore;
+
+
+            return t;
+
+
+        }
+        private int Minimax(int[,] board, bool isMaximizing)
+        {
+            int winner = CheckWinnerInts(board);
+            if (winner != 0) return winner;
+
+            if (isMaximizing)
+            {
+                int bestScore = -999;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (board[i, j] == 0)
+                        {
+
+                            board[i, j] = 1;
+                            int score = Minimax(board, false);
+                            board[i, j] = 0;
+                            bestScore = Math.Max(bestScore, score);
+                        }
+                    }
+                }
+                return 0;
+            }
+            else
+            {
+
+                int bestScore = 999;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (board[i, j] == 0)
+                        {
+                            board[i, j] = -1;
+                            int score = Minimax(board, true);
+                            board[i, j] = 0;
+                            bestScore = Math.Min(bestScore, score);
+                        }
+                    }
+                }
+                return bestScore;
 
             }
-            private int CheckWinnerInts(int[,] fields)
+
+        }
+        private int CheckWinnerInts(int[,] fields)
             {
 
 

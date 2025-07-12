@@ -28,7 +28,7 @@ namespace TicTacToe.Classes
         public void Save()
         {
             if (_history.Count == 0) return;
-            string fileName = String.Concat(GameSettings.LogDirectory, FormatLogFileName());
+            string fileName = String.Concat(GameSettings.LogDirectory+"\\", FormatLogFileName());
             string[] headLines = FormatHeadline();
             bool fileExists = File.Exists(fileName);
             using (StreamWriter SW = new StreamWriter(fileName, fileExists))
