@@ -61,6 +61,7 @@ namespace TicTacToe.Classes
                         PlayboardField target = PlayAI();
                         System.Threading.Thread.Sleep(500);
                         if (target != null) target.PlayO(ref g);
+                        if (LogThis) _logger.LogInHistory(_currentPlayer.GetName(), _board.GetCoordinates(target));
                         NextTurn();
 
                     }
