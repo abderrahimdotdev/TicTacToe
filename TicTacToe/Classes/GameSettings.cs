@@ -13,7 +13,7 @@ namespace TicTacToe.Classes
         /// <summary>
         /// Gets or sets the directory path where log files are stored.
         /// </summary>
-        public static string LogDirectory = String.Concat(Path.GetTempPath(),"\\TicTacToe\\");
+        public static string LogDirectory = String.Concat(Path.GetTempPath(),"TicTacToe\\");
 
         /// <summary>
         /// Represents the default background color used by the application.
