@@ -41,11 +41,11 @@
             // labelCopy
             // 
             this.labelCopy.AutoSize = true;
-            this.labelCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCopy.Location = new System.Drawing.Point(1397, 913);
+            this.labelCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCopy.Location = new System.Drawing.Point(1373, 913);
             this.labelCopy.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelCopy.Name = "labelCopy";
-            this.labelCopy.Size = new System.Drawing.Size(201, 26);
+            this.labelCopy.Size = new System.Drawing.Size(222, 29);
             this.labelCopy.TabIndex = 6;
             this.labelCopy.Text = "© Abderrahim 2020";
             // 
@@ -53,12 +53,12 @@
             // 
             this.lblFullscreen.ActiveLinkColor = System.Drawing.Color.Black;
             this.lblFullscreen.AutoSize = true;
-            this.lblFullscreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullscreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFullscreen.LinkColor = System.Drawing.Color.Black;
             this.lblFullscreen.Location = new System.Drawing.Point(76, 913);
             this.lblFullscreen.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFullscreen.Name = "lblFullscreen";
-            this.lblFullscreen.Size = new System.Drawing.Size(247, 26);
+            this.lblFullscreen.Size = new System.Drawing.Size(275, 29);
             this.lblFullscreen.TabIndex = 8;
             this.lblFullscreen.TabStop = true;
             this.lblFullscreen.Text = "Enable full-screen mode";
