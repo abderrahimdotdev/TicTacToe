@@ -63,13 +63,6 @@ namespace TicTacToe.Classes
             return logFiles;
 
         }
-        public static void BindTo(ref ComboBox source)
-        {
-            Dictionary<string, string> logFiles = Import();
-            source.DataSource = new BindingSource(logFiles, null);
-            source.DisplayMember = "Value";
-            source.ValueMember = "Key";
-        }
         public static string[] GetFilesPath()
         {
             return Directory.GetFiles(GameSettings.LogDirectory, "*.txt");

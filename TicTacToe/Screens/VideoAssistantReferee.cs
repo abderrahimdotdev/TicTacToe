@@ -11,12 +11,12 @@ namespace TicTacToe.Screens
     public partial class VideoAssistantReferee : Form
     {
 
-        Dictionary<string, string> logFiles = null;
-        Dictionary<int, Dictionary<string, List<string>>> GameSteps;
-        Dictionary<int, string> StartingPlayers = null;
-        GameManager gm;
-        string player1Name = "", player2Name = "";
-        BackgroundWorker BW;
+        private Dictionary<string, string> logFiles = null;
+        private Dictionary<int, Dictionary<string, List<string>>> GameSteps;
+        private Dictionary<int, string> StartingPlayers = null;
+        private GameManager gm;
+        private string player1Name, player2Name;
+        private BackgroundWorker BW;
         public VideoAssistantReferee()
         {
             InitializeComponent();
@@ -25,8 +25,8 @@ namespace TicTacToe.Screens
         private void VideoAssistantReferee_Load(object sender, EventArgs e)
         {
 
-            logFiles = Log.Import();
-            Log.BindTo(ref cmbFileNames);
+            logFiles = GameLogger.Import();
+            BindTo(ref cmbFileNames);
             GameSteps = new Dictionary<int, Dictionary<string, List<string>>>();
             StartingPlayers = new Dictionary<int, string>();
             gm = new GameManager(new Player("Tom"), new Player("Jerry"), this.Height);
@@ -35,7 +35,6 @@ namespace TicTacToe.Screens
             BW.DoWork += PlayGame;
             BW.WorkerSupportsCancellation = true;
             BW.RunWorkerCompleted += Done;
-
 
         }
 
@@ -65,19 +64,23 @@ namespace TicTacToe.Screens
                 else
                 {
                     lastPlayed = p1;
-                    step++; // Incrementing the step counter after both of players are made their coresponding steps
+                    // Increments the step counter after both of players have made their moves
+                    step++;
                 }
             }
 
+        }
+        private void BindTo(ref ComboBox source)
+        {
+            source.DataSource = new BindingSource(logFiles, null);
+            source.DisplayMember = "Value";
+            source.ValueMember = "Key";
         }
         private void CancelBackgroundWork()
         {
             gm.NewGame();
             BW.DoWork -= PlayGame;
             BW.RunWorkerCompleted -= Done;
-
-
-
         }
         private void Done(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -86,7 +89,6 @@ namespace TicTacToe.Screens
                 BW.RunWorkerAsync(listPlayedGames.SelectedIndex);
             Repaint();
             gm.NewGame();
-
         }
 
         private void SimulateMove(int GameIndex, string playerName, int stepNumber)
@@ -97,7 +99,6 @@ namespace TicTacToe.Screens
             gm.MarkMove(int.Parse(cords.Split(',')[0]), int.Parse(cords.Split(',')[1]), ref g, false);
 
         }
-
 
         private void LoadLogData(string fileName)
         {
@@ -113,22 +114,19 @@ namespace TicTacToe.Screens
                 int index = 0;
                 listPlayedGames.Items.Clear();
                 string line;
-                //List<string> Files = new List<string>();
                 using (StreamReader SR = new StreamReader(fileName))
                 {
                     while ((line = SR.ReadLine()) != null)
                     {
                         if (line[0] == '>')
                         {
-                            title = Log.ShortHeadline(line);
+                            title = GameLogger.ShortHeadline(line);
                             listPlayedGames.Items.Add(title);
-                            //Files.Add(title);
                             GameSteps.Add(index, new Dictionary<string, List<string>>());
                             player1Name = title.Split(' ')[0].Trim();
                             player2Name = title.Split(']')[1].Trim().Split(' ')[0].Trim();
                             GameSteps[index].Add(player1Name, new List<string>());
                             GameSteps[index].Add(player2Name, new List<string>());
-
                         }
                         else
                         {
@@ -159,18 +157,14 @@ namespace TicTacToe.Screens
         }
         private void Repaint()
         {
-
             Graphics currentGraphics = this.CreateGraphics();
             currentGraphics.Clear(this.BackColor);
             VAR_Paint(null, new PaintEventArgs(currentGraphics, this.ClientRectangle));
-
-
         }
 
         private void cmbFileNames_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadLogData(((ComboBox)sender).SelectedValue.ToString());
-
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
