@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\GameSettings.cs" />
-    <Compile Include="Classes\Log.cs" />
+    <Compile Include="Classes\GameLogger.cs" />
     <Compile Include="Classes\Playboard.cs" />
     <Compile Include="Classes\PlayboardField.cs" />
     <Compile Include="Classes\Player.cs" />

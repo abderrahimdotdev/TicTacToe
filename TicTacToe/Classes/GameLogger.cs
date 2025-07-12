@@ -5,26 +5,26 @@ using System.Windows.Forms;
 
 namespace TicTacToe.Classes
 {
-    internal class Log
+    internal class GameLogger
     {
-        List<string> _history;
-        Player _player1 = null, _player2 = null;
-        int _player1score = 0, _player2score = 0;
-        public Log(Player Player1, Player Player2)
+        private List<string> history;
+        private Player player1 = null, player2 = null;
+        private int player1score = 0, player2score = 0;
+        public GameLogger(Player Player1, Player Player2)
         {
-            _history = new List<string>();
-            _player1 = Player1;
-            _player2 = Player2;
+            history = new List<string>();
+            player1 = Player1;
+            player2 = Player2;
         }
         public void LogInHistory(string PlayerName, string PlayedCoordinates)
         {
-            _history.Add(PlayerName + " : [" + PlayedCoordinates + "]");
+            history.Add(PlayerName + " : [" + PlayedCoordinates + "]");
 
         }
 
         public void Save()
         {
-            if (_history.Count == 0) return;
+            if (history.Count == 0) return;
             if (!Directory.Exists(GameSettings.LogDirectory))
             {
                 Directory.CreateDirectory(GameSettings.LogDirectory);
@@ -41,21 +41,21 @@ namespace TicTacToe.Classes
                 {
                     SW.WriteLine(s);
                 }
-                foreach (string s in _history)
+                foreach (string s in history)
                 {
                     SW.WriteLine(s);
                 }
                 SW.WriteLine("[OVER]");
                 SW.Flush();
                 SW.Close();
-                _history.Clear();
+                history.Clear();
             }
 
         }
         public static Dictionary<string, string> Import()
         {
             Dictionary<string, string> logFiles = new Dictionary<string, string>();
-            string[] logfs = Log.GetFilesPath();
+            string[] logfs = GameLogger.GetFilesPath();
             foreach (string file in logfs)
             {
                 logFiles.Add(file, Path.GetFileName(file).Split('.')[0]);
@@ -84,32 +84,32 @@ namespace TicTacToe.Classes
         }
         public void ClearHistory()
         {
-            _history.Clear();
+            history.Clear();
         }
         private Player GetWinner()
         {
             Player winner = null;
-            int p1score = _player1.Score,
-                p2score = _player2.Score;
-            if (p1score > _player1score && p2score == _player2score)
-                winner = _player1;
+            int p1score = player1.Score,
+                p2score = player2.Score;
+            if (p1score > player1score && p2score == player2score)
+                winner = player1;
             else
-                winner = _player2;
+                winner = player2;
 
-            _player1score = _player1.Score;
-            _player2score = _player2.Score;
+            player1score = player1.Score;
+            player2score = player2.Score;
 
             return winner;
         }
         private string[] FormatHeadline()
         {
             string dashes = "";
-            string player1Name = _player1.Name;
-            string player2Name = _player2.Name;
-            if (_player1.Name == GetWinner().Name) player1Name += " (Winner)"; else player2Name += " (Winner)";
+            string player1Name = player1.Name;
+            string player2Name = player2.Name;
+            if (player1.Name == GetWinner().Name) player1Name += " (Winner)"; else player2Name += " (Winner)";
 
             // In case of any modification to the headline, consider changing the ExtractLabels() method located in VAR Class.
-            string headLine = "> " + player1Name + " [" + _player1.Score + "-" + _player2.Score + "] " + player2Name + " :::::: à " + DateTime.Now.ToString();
+            string headLine = "> " + player1Name + " [" + player1.Score + "-" + player2.Score + "] " + player2Name + " :::::: à " + DateTime.Now.ToString();
 
             foreach (char c in headLine)
             {
