@@ -13,23 +13,23 @@ namespace TicTacToe.Classes
         /// <summary>
         /// Gets or sets the directory path where log files are stored.
         /// </summary>
-        public static string LogDirectory = String.Concat(Path.GetTempPath(), "TicTacToe\\");
+        public static readonly string LogDirectory = String.Concat(Path.GetTempPath(), "TicTacToe\\");
 
         /// <summary>
         /// Represents the default background color used by the application.
         /// </summary>
-        public static Color DefaultBackgroundColor = Color.Cornsilk;
+        public static readonly Color DefaultBackgroundColor = Color.Cornsilk;
 
         /// <summary>
         /// Represent image resources of Tom and Jerry used in the application.
         /// </summary>
-        public static Image TomPicture = TicTacToe.Properties.Resources.Tom;
-        public static Image JerryPicture = TicTacToe.Properties.Resources.Jerry;
+        public static readonly Image TomPicture = TicTacToe.Properties.Resources.Tom;
+        public static readonly Image JerryPicture = TicTacToe.Properties.Resources.Jerry;
 
         /// <summary>
         /// Represents the default color used for playboard field elements.
         /// </summary>
-        public static Color FieldsColor = Color.MidnightBlue;
+        public static readonly Color FieldsColor = Color.MidnightBlue;
 
     }
 }
