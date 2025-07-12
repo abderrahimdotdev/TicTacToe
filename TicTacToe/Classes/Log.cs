@@ -92,27 +92,27 @@ namespace TicTacToe.Classes
         private Player GetWinner()
         {
             Player winner = null;
-            int p1score = _player1.GetScore(),
-                p2score = _player2.GetScore();
+            int p1score = _player1.Score,
+                p2score = _player2.Score;
             if (p1score > _player1score && p2score == _player2score)
                 winner = _player1;
             else
                 winner = _player2;
 
-            _player1score = _player1.GetScore();
-            _player2score = _player2.GetScore();
+            _player1score = _player1.Score;
+            _player2score = _player2.Score;
 
             return winner;
         }
         private string[] FormatHeadline()
         {
             string dashes = "";
-            string player1Name = _player1.GetName();
-            string player2Name = _player2.GetName();
-            if (_player1.GetName() == GetWinner().GetName()) player1Name += " (Winner)"; else player2Name += " (Winner)";
+            string player1Name = _player1.Name;
+            string player2Name = _player2.Name;
+            if (_player1.Name == GetWinner().Name) player1Name += " (Winner)"; else player2Name += " (Winner)";
 
             // In case of any modification to the headline, consider changing the ExtractLabels() method located in VAR Class.
-            string headLine = "> " + player1Name + " [" + _player1.GetScore() + "-" + _player2.GetScore() + "] " + player2Name + " :::::: à " + DateTime.Now.ToString();
+            string headLine = "> " + player1Name + " [" + _player1.Score + "-" + _player2.Score + "] " + player2Name + " :::::: à " + DateTime.Now.ToString();
 
             foreach (char c in headLine)
             {

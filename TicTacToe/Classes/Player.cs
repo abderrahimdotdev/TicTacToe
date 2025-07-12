@@ -8,31 +8,23 @@ namespace TicTacToe.Classes
 {
     internal class Player
     {
-        int _score;
-        string _name;
+        public int Score { get; private set; }
+        public string Name { get; private set; }
 
         public Player(string PlayerName)
         {
             if (string.IsNullOrWhiteSpace(PlayerName.Trim())) throw new ArgumentNullException("PlayerName", "All players must have a name");
-            _name = PlayerName;
-            _score = 0;
+            Name = PlayerName;
+            Score = 0;
         }
         public void Win()
         {
-            _score++;
+            Score++;
         }
         public void ResetScore()
         {
-            _score = 0;
-        }
-        public string GetName()
-        {
-            return _name;
+            Score = 0;
         }
 
-        public int GetScore()
-        {
-            return _score;
-        }
     }
 }

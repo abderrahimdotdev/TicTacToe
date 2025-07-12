@@ -37,13 +37,13 @@ namespace TicTacToe.Screens
         }
         private void SetPlayersName()
         {
-            Player1Name.Text = p1.GetName();
-            Player2Name.Text = p2.GetName();
+            Player1Name.Text = p1.Name;
+            Player2Name.Text = p2.Name;
         }
         private void RefreshPlayersScore()
         {
-            Player1Score.Text = p1.GetScore().ToString();
-            Player2Score.Text = p2.GetScore().ToString();
+            Player1Score.Text = p1.Score.ToString();
+            Player2Score.Text = p2.Score.ToString();
         }
         private void UpdateUI(GameProgress progress)
         {

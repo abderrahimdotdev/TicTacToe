@@ -54,14 +54,14 @@ namespace TicTacToe.Classes
             if (MarkSucceed)
             {
 
-                if (LogThis) _logger.LogInHistory(_currentPlayer.GetName(), _board.GetCoordinates(f));
+                if (LogThis) _logger.LogInHistory(_currentPlayer.Name, _board.GetCoordinates(f));
                 NextTurn();
                 if (_vsComputer && _currentPlayer == _player2)
                 {
                     PlayboardField target = PlayAI();
                     System.Threading.Thread.Sleep(500);
                     if (target != null) target.PlayO(ref g);
-                    if (LogThis) _logger.LogInHistory(_currentPlayer.GetName(), _board.GetCoordinates(target));
+                    if (LogThis) _logger.LogInHistory(_currentPlayer.Name, _board.GetCoordinates(target));
                     NextTurn();
 
                 }
@@ -205,7 +205,7 @@ namespace TicTacToe.Classes
                 case GameProgress.Over:
                     _currentPlayer.Win();
                     _logger.Save();
-                    MessageBox.Show(_currentPlayer.GetName() + " won the game.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show(_currentPlayer.Name + " won the game.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     break;
                 case GameProgress.InProgress:
 
