@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace TicTacToe.Classes
@@ -8,56 +9,56 @@ namespace TicTacToe.Classes
     internal class GameManager
     {
 
-        Playboard _board;
-        Player _player1, _player2;
-        Player _currentPlayer;
-        bool _startWithTom;
-        Log _logger = null;
-        GameProgress _progress;
-        bool _vsComputer;
+        private Playboard board;
+        private Player player1, player2;
+        private Player currentPlayer;
+        private readonly bool startWithTom;
+        private GameLogger logger = null;
+        private GameProgress progress;
+        private bool vsComputer;
+
         public delegate void Update(GameProgress Progress);
         public event Update OnNextMove;
 
         public GameManager(Player Player1, Player Player2, int BoardSize, bool VSComputer = false, bool StartWithTom = false)
         {
-            _vsComputer = VSComputer;
-            _board = Playboard.CreateBord(BoardSize);
-            _player1 = Player1;
-            _player2 = Player2;
-            _logger = new Log(Player1, Player2);
-            _currentPlayer = StartWithTom ? Player2 : Player1;
-            _startWithTom = StartWithTom;
-            _progress = GameProgress.InProgress;
+            vsComputer = VSComputer;
+            board = Playboard.CreateBord(BoardSize);
+            player1 = Player1;
+            player2 = Player2;
+            logger = new GameLogger(Player1, Player2);
+            currentPlayer = StartWithTom ? Player2 : Player1;
+            startWithTom = StartWithTom;
+            progress = GameProgress.InProgress;
 
         }
 
         public void MarkMove(Point p, ref Graphics g, bool LogThis = true)
         {
-            PlayboardField currentField = _board.FieldAt(p);
+            PlayboardField currentField = board.FieldAt(p);
             Mark(currentField, ref g, LogThis);
         }
         public void MarkMove(int x, int y, ref Graphics g, bool LogThis = true)
         {
-            PlayboardField currentField = _board.FieldAt(x, y);
+            PlayboardField currentField = board.FieldAt(x, y);
             Mark(currentField, ref g, LogThis);
         }
         private void Mark(PlayboardField f, ref Graphics g, bool LogThis)
         {
             if (f == null) return;
 
-            bool MarkSucceed = (_currentPlayer == _player1 && f.PlayX(ref g) || (_currentPlayer == _player2 && f.PlayO(ref g)));
+            bool MarkSucceed = (currentPlayer == player1 && f.PlayX(ref g) || (currentPlayer == player2 && f.PlayO(ref g)));
 
             if (MarkSucceed)
             {
-
-                if (LogThis) _logger.LogInHistory(_currentPlayer.Name, _board.GetCoordinates(f));
+                if (LogThis) logger.LogInHistory(currentPlayer.Name, board.GetCoordinates(f));
                 NextTurn();
-                if (_vsComputer && _currentPlayer == _player2)
+                if (vsComputer && currentPlayer == player2)
                 {
                     PlayboardField target = PlayAI();
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(new Random().Next(300,800));
                     if (target != null) target.PlayO(ref g);
-                    if (LogThis) _logger.LogInHistory(_currentPlayer.Name, _board.GetCoordinates(target));
+                    if (LogThis) logger.LogInHistory(currentPlayer.Name, board.GetCoordinates(target));
                     NextTurn();
 
                 }
@@ -68,9 +69,16 @@ namespace TicTacToe.Classes
         private PlayboardField PlayAI()
         {
             PlayboardField t = null;
-            int bestScore = -2;
 
-            int[,] fields = _board.ToIntegers();
+            if (board.CountEmptySpots() >= 8)
+            {
+                Random r = new Random();
+                t = board.FieldAt(r.Next(0,3), r.Next(0, 3));
+                return t;
+            }
+            
+            int bestScore = -2;
+            int[,] fields = board.ToIntegers();
 
             for (int i = 0; i < 3; i++)
             {
@@ -84,15 +92,12 @@ namespace TicTacToe.Classes
                         if (score > bestScore)
                         {
                             bestScore = Math.Max(score, bestScore);
-                            t = _board.FieldAt(i, j);
+                            t = board.FieldAt(i, j);
                         }
                     }
 
                 }
             }
-
-
-
             return t;
 
 
@@ -146,7 +151,6 @@ namespace TicTacToe.Classes
         private int CheckWinnerInts(int[,] fields)
         {
 
-
             if (// Diagonally
                 (fields[1, 1] == 1 && fields[0, 0] == 1 && fields[2, 2] == 1) ||
                 (fields[0, 2] == 1 && fields[2, 0] == 1 && fields[1, 1] == 1) ||
@@ -178,42 +182,35 @@ namespace TicTacToe.Classes
         }
         private void CheckProgress()
         {
-
-            int EmptySpots = _board.CountEmptySpots();
+            int EmptySpots = board.CountEmptySpots();
             if (9 - EmptySpots >= 3)
             {
                 if (CheckWinner())
-                    _progress = GameProgress.Over;
+                    progress = GameProgress.Over;
                 else if (EmptySpots == 0)
-                    _progress = GameProgress.Draw;
+                    progress = GameProgress.Draw;
             }
             else
-                _progress = GameProgress.InProgress;
-
-
+                progress = GameProgress.InProgress;
         }
 
         private void NextTurn()
         {
             CheckProgress();
-            switch (_progress)
+            if(progress == GameProgress.Over)
             {
-                case GameProgress.Over:
-                    _currentPlayer.Win();
-                    _logger.Save();
-                    MessageBox.Show(_currentPlayer.Name + " won the game.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    break;
-                case GameProgress.InProgress:
-
-                    break;
-                case GameProgress.Draw:
-                    _logger.ClearHistory();
-                    MessageBox.Show("Draw.", "No winner", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
+                currentPlayer.Win();
+                logger.Save();
+                MessageBox.Show(currentPlayer.Name + " won the game.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);   
+            }
+            else if (progress == GameProgress.Draw)
+            {
+                logger.ClearHistory();
+                MessageBox.Show("Draw.", "No winner", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (OnNextMove != null) OnNextMove(_progress);
-            _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
+            if (OnNextMove != null) OnNextMove(progress);
+            currentPlayer = currentPlayer == player1 ? player2 : player1;
 
         }
 
@@ -223,18 +220,18 @@ namespace TicTacToe.Classes
 
             for (int i = 0, j = 2; i < 3 && j >= 0; i++, j--)
             {
-                if ((_board.FieldAt(1, 1).IsX() && _board.FieldAt(0, i).IsX() && _board.FieldAt(2, j).IsX()) ||
-                    (_board.FieldAt(1, 1).IsO() && _board.FieldAt(0, i).IsO() && _board.FieldAt(2, j).IsO()))
+                if ((board.FieldAt(1, 1).IsX() && board.FieldAt(0, i).IsX() && board.FieldAt(2, j).IsX()) ||
+                    (board.FieldAt(1, 1).IsO() && board.FieldAt(0, i).IsO() && board.FieldAt(2, j).IsO()))
                 {
                     Won = true;
                 }
-                else if ((_board.FieldAt(i, 0).IsX() && _board.FieldAt(i, 1).IsX() && _board.FieldAt(i, 2).IsX()) ||
-                        (_board.FieldAt(i, 0).IsO() && _board.FieldAt(i, 1).IsO() && _board.FieldAt(i, 2).IsO()))
+                else if ((board.FieldAt(i, 0).IsX() && board.FieldAt(i, 1).IsX() && board.FieldAt(i, 2).IsX()) ||
+                        (board.FieldAt(i, 0).IsO() && board.FieldAt(i, 1).IsO() && board.FieldAt(i, 2).IsO()))
                 {
                     Won = true;
                 }
-                else if ((_board.FieldAt(0, i).IsX() && _board.FieldAt(1, i).IsX() && _board.FieldAt(2, i).IsX()) ||
-                        (_board.FieldAt(0, i).IsO() && _board.FieldAt(1, i).IsO() && _board.FieldAt(2, i).IsO()))
+                else if ((board.FieldAt(0, i).IsX() && board.FieldAt(1, i).IsX() && board.FieldAt(2, i).IsX()) ||
+                        (board.FieldAt(0, i).IsO() && board.FieldAt(1, i).IsO() && board.FieldAt(2, i).IsO()))
                 {
                     Won = true;
                 }
@@ -244,17 +241,17 @@ namespace TicTacToe.Classes
         }
         public void DrawPlayboard(ref Graphics g)
         {
-            _board.Draw(ref g);
+            board.Draw(ref g);
         }
         public void NewGame(bool ResetScore = false)
         {
             if (ResetScore)
             {
-                _player1.ResetScore();
-                _player2.ResetScore();
+                player1.ResetScore();
+                player2.ResetScore();
                 OnNextMove(GameProgress.Reset);
             }
-            _board.Clean();
+            board.Clean();
 
         }
     }
