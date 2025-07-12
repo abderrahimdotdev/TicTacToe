@@ -28,14 +28,16 @@ namespace TicTacToe.Classes
         public void Save()
         {
             if (_history.Count == 0) return;
-            string logDir = Path.Combine(GameSettings.LogDirectory, FormatLogFileName());
-            if (!Directory.Exists(logDir)){
-                Directory.CreateDirectory(logDir);
+            if (!Directory.Exists(GameSettings.LogDirectory))
+            {
+                Directory.CreateDirectory(GameSettings.LogDirectory);
             }
+            string logFile = Path.Combine(GameSettings.LogDirectory, FormatLogFileName());
+           
 
             string[] headLines = FormatHeadline();
-            bool dirExists = File.Exists(logDir);
-            using (StreamWriter SW = new StreamWriter(logDir, dirExists))
+            bool fileExists = File.Exists(logFile);
+            using (StreamWriter SW = new StreamWriter(logFile, fileExists))
             {
 
                 foreach (string s in headLines)
