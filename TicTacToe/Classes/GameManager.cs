@@ -33,12 +33,12 @@ namespace TicTacToe.Classes
 
         public void MarkMove(Point p, ref Graphics g, bool LogThis = true)
         {
-            PlayboardField currentField = _board.At(p);
+            PlayboardField currentField = _board.FieldAt(p);
             Mark(currentField, ref g, LogThis);
         }
         public void MarkMove(int x, int y, ref Graphics g, bool LogThis = true)
         {
-            PlayboardField currentField = _board.At(x, y);
+            PlayboardField currentField = _board.FieldAt(x, y);
             Mark(currentField, ref g, LogThis);
         }
         private void Mark(PlayboardField f, ref Graphics g, bool LogThis)
@@ -84,7 +84,7 @@ namespace TicTacToe.Classes
                         if (score > bestScore)
                         {
                             bestScore = Math.Max(score, bestScore);
-                            t = _board.At(i, j);
+                            t = _board.FieldAt(i, j);
                         }
                     }
 
@@ -223,18 +223,18 @@ namespace TicTacToe.Classes
 
             for (int i = 0, j = 2; i < 3 && j >= 0; i++, j--)
             {
-                if ((_board.At(1, 1).IsX() && _board.At(0, i).IsX() && _board.At(2, j).IsX()) ||
-                    (_board.At(1, 1).IsO() && _board.At(0, i).IsO() && _board.At(2, j).IsO()))
+                if ((_board.FieldAt(1, 1).IsX() && _board.FieldAt(0, i).IsX() && _board.FieldAt(2, j).IsX()) ||
+                    (_board.FieldAt(1, 1).IsO() && _board.FieldAt(0, i).IsO() && _board.FieldAt(2, j).IsO()))
                 {
                     Won = true;
                 }
-                else if ((_board.At(i, 0).IsX() && _board.At(i, 1).IsX() && _board.At(i, 2).IsX()) ||
-                        (_board.At(i, 0).IsO() && _board.At(i, 1).IsO() && _board.At(i, 2).IsO()))
+                else if ((_board.FieldAt(i, 0).IsX() && _board.FieldAt(i, 1).IsX() && _board.FieldAt(i, 2).IsX()) ||
+                        (_board.FieldAt(i, 0).IsO() && _board.FieldAt(i, 1).IsO() && _board.FieldAt(i, 2).IsO()))
                 {
                     Won = true;
                 }
-                else if ((_board.At(0, i).IsX() && _board.At(1, i).IsX() && _board.At(2, i).IsX()) ||
-                        (_board.At(0, i).IsO() && _board.At(1, i).IsO() && _board.At(2, i).IsO()))
+                else if ((_board.FieldAt(0, i).IsX() && _board.FieldAt(1, i).IsX() && _board.FieldAt(2, i).IsX()) ||
+                        (_board.FieldAt(0, i).IsO() && _board.FieldAt(1, i).IsO() && _board.FieldAt(2, i).IsO()))
                 {
                     Won = true;
                 }
