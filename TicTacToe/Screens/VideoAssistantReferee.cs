@@ -17,6 +17,7 @@ namespace TicTacToe.Screens
         private GameManager gm;
         private string player1Name, player2Name;
         private BackgroundWorker BW;
+
         public VideoAssistantReferee()
         {
             InitializeComponent();
