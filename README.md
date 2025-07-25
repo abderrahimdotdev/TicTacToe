@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="50%" alt="TicTacToe with Tom & Jerry Game User Interface" src="#">
+    <img width="68%" alt="TicTacToe with Tom & Jerry Game User Interface" src="https://raw.githubusercontent.com/abderrahimdotdev/TicTacToe/3005bd2d2929bea2b073eecd8b7734da5a01ef71/Images/cover.svg">
     <br>
     <strong>Tom & Jerry Tic-Tac-Toe</strong>
 </p>
@@ -24,36 +24,6 @@ Tom & Jerry Tic-Tac-Toe is a cartoon-inspired twist on the classic game built wi
 ## Screenshots
 
 <p align="center">
-    <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="#">
-    <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="#">
+    <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="https://raw.githubusercontent.com/abderrahimdotdev/TicTacToe/refs/heads/master/Images/HomeScreen.jpg">
+    <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="https://raw.githubusercontent.com/abderrahimdotdev/TicTacToe/refs/heads/master/Images/Game.jpg">
 </p>
-
-
-
-  
-## Game log file format: 
-
-Every round is stored in a text file with a filename of a date pattern DD-MM-YYYY.txt<br>The content of the file is organized as shown below:
-
-```
---------------------------------------------------------
-> Jerry (Winner) [1-0] Tom :::::: at 12/07/2025 10:45:37
---------------------------------------------------------
-Jerry : [1,1]
-Tom : [0,1]
-Jerry : [1,0]
-Tom : [2,1]
-Jerry : [1,2]
-[OVER]
---------------------------------------------------------
-> Jerry [1-1] Tom (Winner) :::::: at 12/07/2025 10:46:04
---------------------------------------------------------
-Tom : [0,0]
-Jerry : [1,1]
-Tom : [0,1]
-Jerry : [1,0]
-Tom : [1,2]
-Jerry : [2,1]
-Tom : [0,2]
-[OVER]
-```
