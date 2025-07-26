@@ -6,9 +6,7 @@ namespace TicTacToe.Classes
 
     internal class PlayboardField
     {
-
         enum State { Empty = 0, X = 1, O = -1 };
-
 
         private Rectangle rectangle;
         private State currentState;
@@ -25,14 +23,12 @@ namespace TicTacToe.Classes
             currentState = State.Empty;
             jerry = GameSettings.JerryPicture.GetThumbnailImage(rectangle.Width - margin, rectangle.Height - margin, null, new IntPtr());
             tom = GameSettings.TomPicture.GetThumbnailImage(rectangle.Width - margin, rectangle.Height - margin, null, new IntPtr());
-
         }
 
         public void Draw(Graphics g)
         {
             Pen p = new Pen(GameSettings.FieldsColor, 2);
             g.DrawRectangle(p, rectangle);
-
         }
         public bool PlayX(ref Graphics g)
         {
@@ -43,7 +39,6 @@ namespace TicTacToe.Classes
 
             currentState = State.X;
             return true;
-
         }
         public bool PlayO(ref Graphics g)
         {
@@ -74,7 +69,6 @@ namespace TicTacToe.Classes
             int Padding = 20;
             g.FillEllipse(b, rectangle.Left + Padding / 2, rectangle.Top + Padding / 2, rectangle.Width - Padding, rectangle.Width - Padding);
         }
-
 
         // -- Utility Methods --
 

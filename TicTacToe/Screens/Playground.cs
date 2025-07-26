@@ -24,10 +24,6 @@ namespace TicTacToe.Screens
             gameManager.OnNextMove += UpdateUI;
             SetPlayersName();
             HighLightPlayerName();
-
-
-
-
         }
         private void SetPlayersName()
         {
@@ -82,7 +78,6 @@ namespace TicTacToe.Screens
         {
             Graphics g = e.Graphics;
             gameManager.DrawPlayboard(ref g);
-
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -96,7 +91,6 @@ namespace TicTacToe.Screens
         {
             Graphics g = this.CreateGraphics();
             gameManager.MarkMove(e.Location, ref g);
-
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)

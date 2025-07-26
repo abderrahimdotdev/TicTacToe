@@ -26,6 +26,5 @@ namespace TicTacToe.Classes
         /// Represents the default color used for playboard field elements.
         /// </summary>
         public static readonly Color FieldsColor = Color.MidnightBlue;
-
     }
 }

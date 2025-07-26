@@ -23,7 +23,7 @@ namespace TicTacToe.Classes
         public static void ShowVAR(Form Container)
         {
             VideoAssistantReferee VAR = new VideoAssistantReferee();
-            SetupScreen(Container,VAR);
+            SetupScreen(Container, VAR);
             VAR.Show();
         }
         private static void SetupScreen(Form container, Form screen)
@@ -55,6 +55,7 @@ namespace TicTacToe.Classes
                 }
             }
         }
+
         private static void RenderButton(Button btn)
         {
             btn.FlatAppearance.MouseDownBackColor = Color.Transparent;

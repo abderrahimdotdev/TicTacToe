@@ -10,16 +10,17 @@ namespace TicTacToe.Classes
         private List<string> history;
         private Player player1 = null, player2 = null;
         private int player1score = 0, player2score = 0;
+
         public GameLogger(Player Player1, Player Player2)
         {
             history = new List<string>();
             player1 = Player1;
             player2 = Player2;
         }
+
         public void LogInHistory(string PlayerName, string PlayedCoordinates)
         {
             history.Add(PlayerName + " : [" + PlayedCoordinates + "]");
-
         }
 
         public void Save()
@@ -31,12 +32,10 @@ namespace TicTacToe.Classes
             }
             string logFile = Path.Combine(GameSettings.LogDirectory, FormatLogFileName());
 
-
             string[] headLines = FormatHeadline();
             bool fileExists = File.Exists(logFile);
             using (StreamWriter SW = new StreamWriter(logFile, fileExists))
             {
-
                 foreach (string s in headLines)
                 {
                     SW.WriteLine(s);
@@ -61,24 +60,28 @@ namespace TicTacToe.Classes
                 logFiles.Add(file, Path.GetFileName(file).Split('.')[0]);
             }
             return logFiles;
-
         }
+
         public static string[] GetFilesPath()
         {
             return Directory.GetFiles(GameSettings.LogDirectory, "*.txt");
         }
+
         private string FormatLogFileName()
         {
             return String.Concat(DateTime.Now.ToShortDateString().Replace(' ', '_').Replace(':', '-').Replace('/', '-').Trim(), ".txt");
         }
+
         public static string ShortHeadline(string headline)
         {
             return headline.Substring(headline.IndexOf(' ') + 1, headline.IndexOf(':') - 2).Trim();
         }
+
         public void ClearHistory()
         {
             history.Clear();
         }
+
         private Player GetWinner()
         {
             Player winner = null;
@@ -94,6 +97,7 @@ namespace TicTacToe.Classes
 
             return winner;
         }
+
         private string[] FormatHeadline()
         {
             string dashes = "";

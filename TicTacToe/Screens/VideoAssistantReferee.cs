@@ -25,7 +25,6 @@ namespace TicTacToe.Screens
 
         private void VideoAssistantReferee_Load(object sender, EventArgs e)
         {
-
             logFiles = GameLogger.Import();
             BindTo(ref cmbFileNames);
             GameSteps = new Dictionary<int, Dictionary<string, List<string>>>();
@@ -36,7 +35,6 @@ namespace TicTacToe.Screens
             BW.DoWork += PlayGame;
             BW.WorkerSupportsCancellation = true;
             BW.RunWorkerCompleted += Done;
-
         }
 
         private void PlayGame(object sender, DoWorkEventArgs e)
@@ -69,7 +67,6 @@ namespace TicTacToe.Screens
                     step++;
                 }
             }
-
         }
         private void BindTo(ref ComboBox source)
         {

@@ -51,8 +51,6 @@ namespace TicTacToe.Screens
                 sender.Text = "Enable full-screen mode";
                 sender.ForeColor = sender.ActiveLinkColor = sender.VisitedLinkColor = sender.LinkColor = Color.Black;
             }
-
-
         }
 
         private void btnPlay1_Click(object sender, EventArgs e)
