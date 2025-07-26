@@ -99,5 +99,14 @@ namespace TicTacToe.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Tom_And_Jerry_Main_Theme {
+            get {
+                return ResourceManager.GetStream("Tom_And_Jerry_Main_Theme", resourceCulture);
+            }
+        }
     }
 }
