@@ -95,6 +95,9 @@
     <EmbeddedResource Include="Screens\Playground.resx">
       <DependentUpon>Playground.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\VideoAssistantReferee.resx">
+      <DependentUpon>VideoAssistantReferee.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
