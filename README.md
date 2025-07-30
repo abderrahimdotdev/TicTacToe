@@ -27,11 +27,3 @@ Tom & Jerry Tic-Tac-Toe is a cartoon-inspired twist on the classic game built wi
     <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="https://raw.githubusercontent.com/abderrahimdotdev/TicTacToe/refs/heads/master/Images/HomeScreen.jpg">
     <img width="48%" alt="TicTacToe with Tom & Jerry Game User Interface" src="https://raw.githubusercontent.com/abderrahimdotdev/TicTacToe/refs/heads/master/Images/Game.jpg">
 </p>
-
-## 🤝 Contributing
-
-Contributions are welcome! To contribute:
-1. Fork the repository.
-2. Create a new branch (`git switch -c feature/new-functionality`).
-3. Add your functionality or improve existing ones.
-4. Submit a pull request.
