@@ -113,11 +113,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Assets\Images\Background.png" />
-    <Content Include="Assets\Images\ButtonBg.png" />
-    <Content Include="Assets\Images\Jerry.png" />
-    <Content Include="Assets\Images\Tom.png" />
-    <None Include="Assets\Sounds\Tom-And-Jerry-Main-Theme.wav" />
+    <Content Include="Resources\Images\Background.png" />
+    <Content Include="Resources\Images\ButtonBg.png" />
+    <Content Include="Resources\Images\Jerry.png" />
+    <Content Include="Resources\Images\Tom.png" />
+    <None Include="Resources\Sounds\Tom-And-Jerry-Main-Theme.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
