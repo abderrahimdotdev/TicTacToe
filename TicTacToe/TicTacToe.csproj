@@ -60,28 +60,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Home.cs">
+    <Compile Include="Forms\Home.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\Home.Designer.cs">
+    <Compile Include="Forms\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Main.cs">
+    <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\Main.Designer.cs">
+    <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Playground.cs">
+    <Compile Include="Forms\Playground.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\Playground.Designer.cs">
+    <Compile Include="Forms\Playground.Designer.cs">
       <DependentUpon>Playground.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\VideoAssistantReferee.cs">
+    <Compile Include="Forms\VideoAssistantReferee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Screens\VideoAssistantReferee.Designer.cs">
+    <Compile Include="Forms\VideoAssistantReferee.Designer.cs">
       <DependentUpon>VideoAssistantReferee.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -89,13 +89,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\Home.resx">
+    <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\Playground.resx">
+    <EmbeddedResource Include="Forms\Playground.resx">
       <DependentUpon>Playground.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\VideoAssistantReferee.resx">
+    <EmbeddedResource Include="Forms\VideoAssistantReferee.resx">
       <DependentUpon>VideoAssistantReferee.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
