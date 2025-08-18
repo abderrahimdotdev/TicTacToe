@@ -49,8 +49,8 @@
     <Compile Include="Classes\GameManager.cs" />
     <Compile Include="Classes\GameSettings.cs" />
     <Compile Include="Classes\GameLogger.cs" />
-    <Compile Include="Components\Playboard.cs" />
-    <Compile Include="Components\PlayboardField.cs" />
+    <Compile Include="Controls\Playboard.cs" />
+    <Compile Include="Controls\PlayboardField.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\UIManager.cs" />
     <Compile Include="Program.cs" />
